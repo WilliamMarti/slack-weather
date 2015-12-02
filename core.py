@@ -18,21 +18,24 @@ def hello():
     owm = pyowm.OWM('e9acf144f807e0e7bd7795178be89775')
     observation = owm.weather_at_place('Grand Rapids,us')
     w = observation.get_weather()
-    print str(w)
-    
-    
+    t = w.get_temperature('celsius')
+    t = t['temp']
+    t = (t*1.800) + 32
+    print t
+
+    w = str(w)
+    w = w.split('=')
+    w =  w[2][:-1]    
+    w = "Status: " + w + " - Temperature: " + str(t)   
     
 
-    return str(w)
+    return w
 
 
 
 @app.route('/getweather')
 def getweather():
 
-    observation = owm.weather_at_place('Grand Rapids,us')
-    w = observation.get_weather()
-    print(w)
 
 
     return "hello"
